@@ -1,7 +1,9 @@
+import { RegisterForm } from '@/features/auth/';
+
 export default function Page() {
   return (
-    <main className='flex min-h-screen flex-col items-center justify-between p-24'>
-      Register
-    </main>
+    <div className='flex h-full min-h-screen w-screen'>
+      <RegisterForm />
+    </div>
   );
 }
