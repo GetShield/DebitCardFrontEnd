@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@/utils';
+import { cn } from '@/lib';
 import { useState } from 'react';
 import DebitCard from './DebitCard';
 

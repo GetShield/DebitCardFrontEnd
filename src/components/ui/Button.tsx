@@ -1,4 +1,4 @@
-import { cn } from '@/utils';
+import { cn } from '@/lib';
 import { ButtonHTMLAttributes, FC } from 'react';
 import { Spinner } from '.';
 

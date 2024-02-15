@@ -1,5 +1,7 @@
+import { transactions } from '@/data';
 import { Balance, Reload } from '@/features/balance';
 import { DebitCards } from '@/features/debit-card';
+import { TransactionsHistory } from '@/features/transactions';
 
 export default function Page() {
   return (
@@ -25,7 +27,17 @@ export default function Page() {
           <Reload />
         </div>
       </div>
-      <div className='basis-4/6 p-4'></div>
+      <div className='basis-4/6 divide-y divide-border'>
+        <div className='flex flex-col gap-1 p-7'>
+          <h2 className='font-medium'>Transaction history</h2>
+          <p className='text-sm text-muted-foreground'>
+            Manage and track your track history
+          </p>
+        </div>
+        <div className='p-7'>
+          <TransactionsHistory transactions={transactions} />
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@/utils';
+import { cn } from '@/lib';
 import React, { useState } from 'react';
 
 export interface OptionProps {

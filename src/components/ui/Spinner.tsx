@@ -2,7 +2,7 @@
 
 import { FC } from 'react';
 
-import { cn } from '@/utils';
+import { cn } from '@/lib';
 
 const fixedClass = ' animate-spin pointer-events-none stroke-white ';
 
