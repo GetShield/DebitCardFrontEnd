@@ -31,7 +31,7 @@ const AvatarDropDown: React.FC<Props> = () => {
     <DropDown options={options}>
       <Image
         alt='Avatar'
-        src='/images/avatar.jpg'
+        src='/images/avatar.png'
         width={200}
         height={200}
         className='h-8 w-8 cursor-pointer overflow-auto rounded-full'

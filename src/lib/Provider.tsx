@@ -1,6 +1,7 @@
 'use client';
 
 import { SessionProvider } from 'next-auth/react';
+import { Toaster } from 'sonner';
 
 interface Props {
   children: React.ReactNode;
@@ -8,7 +9,10 @@ interface Props {
 
 const Provider = (props: Props) => {
   return (
-    <SessionProvider refetchInterval={60}>{props.children}</SessionProvider>
+    <SessionProvider refetchInterval={60}>
+      <Toaster />
+      {props.children}
+    </SessionProvider>
   );
 };
 

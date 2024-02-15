@@ -16,7 +16,7 @@ export default async function DashboardLayout({
   return (
     <>
       <Nav />
-      <main className='m-auto h-full min-h-screen max-w-5xl pt-[var(--nav-height)]'>
+      <main className='m-auto h-full min-h-screen max-w-6xl pt-[var(--nav-height)]'>
         {children}
       </main>
     </>

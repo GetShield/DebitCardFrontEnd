@@ -26,7 +26,10 @@ const DropDown: React.FC<Props> = ({ children, options }) => {
     <div className='relative'>
       <div onClick={() => setIsOpen(!isOpen)}>{children}</div>
       {isOpen && (
-        <div className='fixed inset-0' onClick={() => setIsOpen(false)}></div>
+        <div
+          className='fixed inset-0 h-screen w-screen'
+          onClick={() => setIsOpen(false)}
+        ></div>
       )}
       {isOpen && (
         <div className='absolute right-0 mt-1 divide-y overflow-auto rounded-2xl border border-border bg-secondary text-sm'>
