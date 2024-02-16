@@ -23,7 +23,7 @@ export default function Page() {
             Select network to reload your balance
           </span>
         </div>
-        <div className='flex flex-col items-center p-7'>
+        <div className='flex flex-col items-center gap-2 p-7'>
           <Reload />
         </div>
       </div>

@@ -1,5 +1,5 @@
 import Balance from './Balance';
-import CoinSelected from './CoinSelected';
+import CoinsAccepted from './CoinsAccepted';
 import Reload from './Reload';
 
-export { Balance, CoinSelected, Reload };
+export { Balance, CoinsAccepted, Reload };

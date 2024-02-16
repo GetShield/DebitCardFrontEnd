@@ -16,9 +16,10 @@ export function formatDate(date: string) {
   return `${day}`;
 }
 
-export function fromatCurrency(amount: number) {
+export function fromatCurrency(amount: number, digits = 2) {
   return amount.toLocaleString('en-US', {
     style: 'currency',
     currency: 'USD',
+    maximumFractionDigits: digits,
   });
 }

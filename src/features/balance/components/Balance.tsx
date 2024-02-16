@@ -30,7 +30,7 @@ const Balance: React.FC<Props> = () => {
           $47,642.00
         </span>
       </div>
-      <div className='flex flex-col gap-3'>
+      <div className='flex flex-col gap-3 text-sm sm:text-base'>
         <div className='flex items-center justify-between'>
           <span>Total Balance (BTC & USDT)</span>
           <div className='flex items-center gap-1'>

@@ -35,7 +35,7 @@ const DebitCard: React.FC<Props> = ({ name, cardNumber, expiryDate, cvv }) => {
         alt='Debit Card'
         width={318}
         height={200}
-        className='h-[200px] min-h-[200px] w-[318px] min-w-[318px]'
+        className='h-[200px] min-h-[200px] w-[318px] min-w-[318px] bg-black/90'
       />
       <div className='absolute inset-0 tracking-wider'>
         <div className='h-[140px] p-5'>

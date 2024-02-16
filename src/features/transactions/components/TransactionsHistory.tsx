@@ -65,7 +65,7 @@ const TransactionsHistory: React.FC<Props> = ({ transactions }) => {
                 {transaction.coin !== 'USD' && (
                   <span className='min-w-max'>
                     {transaction.type === 'income' ? '+' : '-'}{' '}
-                    {fromatCurrency(transaction.amount)} {transaction.coin}
+                    {fromatCurrency(transaction.amount, 0)} {transaction.coin}
                   </span>
                 )}
               </td>
