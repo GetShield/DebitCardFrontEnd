@@ -1,9 +1,10 @@
 import { transactions } from '@/data';
 import { Balance, Reload } from '@/features/balance';
-import { DebitCards } from '@/features/debit-card';
+import { DebitCards, getCards } from '@/features/debit-card';
 import { TransactionsHistory } from '@/features/transactions';
 
-export default function Page() {
+export default async function Page() {
+  const cards = await getCards();
   return (
     <div className='my-14 flex h-full min-h-screen w-full flex-col divide-x divide-border rounded-md border border-border md:flex-row'>
       <div className='basis-2/6 divide-y divide-border'>
@@ -14,7 +15,7 @@ export default function Page() {
           </p>
         </div>
         <div className='flex flex-col items-center p-7'>
-          <DebitCards />
+          <DebitCards cards={cards} />
           <Balance />
         </div>
         <div className='flex w-full flex-col gap-2 p-7'>

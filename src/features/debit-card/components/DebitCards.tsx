@@ -1,12 +1,14 @@
 'use client';
 
-import { cn } from '@/lib';
 import { useState } from 'react';
+import { Card } from '..';
 import DebitCard from './DebitCard';
 
-interface Pops {}
+interface Pops {
+  cards: Card[];
+}
 
-const DebitCards: React.FC<Pops> = () => {
+const DebitCards: React.FC<Pops> = ({ cards }) => {
   const [cardSelected, setCardSelected] = useState(0);
 
   const FAKE_CARDS = [
@@ -16,32 +18,16 @@ const DebitCards: React.FC<Pops> = () => {
       expiryDate: '09/27',
       cvv: '123',
     },
-    {
-      name: 'Chris Williams',
-      cardNumber: '1234 5678 9101 1121',
-      expiryDate: '12/27',
-      cvv: '123',
-    },
-    {
-      name: 'Chris Williams',
-      cardNumber: '1234 5678 9101 1121',
-      expiryDate: '12/27',
-      cvv: '123',
-    },
-    {
-      name: 'Chris Williams',
-      cardNumber: '1234 5678 9101 1121',
-      expiryDate: '12/27',
-      cvv: '123',
-    },
   ];
+  console.log({ cards });
+  const currentCard = cards[cardSelected];
 
-  const currentCard = FAKE_CARDS[cardSelected];
+  console.log({ currentCard });
 
   return (
     <div className='flex flex-col gap-5 rounded-md bg-muted p-4'>
       <DebitCard {...currentCard} />
-      <div className='flex items-center gap-2'>
+      {/* <div className='flex items-center gap-2'>
         {FAKE_CARDS.map((card, index) => (
           <div
             key={index}
@@ -54,7 +40,7 @@ const DebitCards: React.FC<Pops> = () => {
             onClick={() => setCardSelected(index)}
           ></div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

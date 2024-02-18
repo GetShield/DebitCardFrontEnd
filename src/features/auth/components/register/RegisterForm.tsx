@@ -4,7 +4,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
+import { userService } from '@/features/auth';
+import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 import { RegisterSchema, RegisterSchemaType } from '../..';
 import StepOne from './StepOne';
 import StepTwo from './StepTwo';
@@ -24,19 +27,18 @@ const RegisterForm: React.FC<Props> = () => {
 
   const onSubmit: SubmitHandler<RegisterSchemaType> = async (data) => {
     try {
-      await new Promise((resolve) =>
-        setTimeout(() => {
-          localStorage.setItem(
-            'user',
-            JSON.stringify({
-              name: data.name,
-              email: data.email,
-              token: '123456',
-            })
-          );
-          resolve(null);
-        }, 3000)
-      );
+      const res = await userService.register(data);
+      if (!res) {
+        toast.error('Could not register');
+        return;
+      } else {
+        toast.success('Registered successfully');
+        await signIn('credentials', {
+          ...data,
+          redirect: false,
+        });
+        router.refresh();
+      }
     } catch (error) {
       console.log(error);
     }

@@ -20,11 +20,11 @@ const StepOne: React.FC<Props> = ({ form, setStep }) => {
   } = form;
 
   const { getValues } = form;
-  const { name, email } = getValues();
+  const { user_name, email } = getValues();
 
   const handleContinue = async () => {
-    trigger(['name', 'email']);
-    if (name && email && !errors.name && !errors.email) {
+    trigger(['user_name', 'email']);
+    if (user_name && email && !errors.user_name && !errors.email) {
       setStep(2);
     }
   };
@@ -38,10 +38,14 @@ const StepOne: React.FC<Props> = ({ form, setStep }) => {
           Sign up in less than 2 minutes
         </span>
       </div>
-      <Input placeholder='Enter your name' autoFocus {...register('name')} />
+      <Input
+        placeholder='Enter your name'
+        autoFocus
+        {...register('user_name')}
+      />
       <ErrorMessage
         errors={errors}
-        name='name'
+        name='user_name'
         render={({ message }) => (
           <span className='text-sm text-destructive'>{message}</span>
         )}

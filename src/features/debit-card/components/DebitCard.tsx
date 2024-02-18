@@ -4,15 +4,9 @@ import Image from 'next/image';
 
 import { LogoIcon, MasterCardIcon } from '@/assets';
 import { toast } from 'sonner';
+import { Card } from '..';
 
-interface Props {
-  name: string;
-  cardNumber: string;
-  expiryDate: string;
-  cvv: string;
-}
-
-const DebitCard: React.FC<Props> = ({ name, cardNumber, expiryDate, cvv }) => {
+const DebitCard: React.FC<Card> = ({ userName, cardNumber }) => {
   const copyCode = () => {
     navigator.clipboard
       .writeText(cardNumber)
@@ -50,8 +44,8 @@ const DebitCard: React.FC<Props> = ({ name, cardNumber, expiryDate, cvv }) => {
           </div>
         </div>
         <div className='absolute bottom-0 flex h-[60px] w-full items-center justify-between bg-black/50 px-6 text-xs font-extralight text-background backdrop-blur-sm'>
-          <span>{name}</span>
-          <span>Exp {expiryDate}</span>
+          <span>{userName}</span>
+          {/* <span>Exp {expiryDate}</span> */}
         </div>
       </div>
     </div>

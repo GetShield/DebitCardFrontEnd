@@ -8,18 +8,22 @@ import { Button, Input } from '@/components';
 import { ErrorMessage } from '@hookform/error-message';
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 import { LoginSchema, LoginSchemaType } from '../..';
 
 interface Props {}
 
 const LoginForm: React.FC<Props> = () => {
+  const router = useRouter();
+
   const form = useForm<LoginSchemaType>({
     resolver: zodResolver(LoginSchema),
     mode: 'onChange',
   });
   const {
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isLoading },
     register,
   } = form;
 
@@ -27,8 +31,14 @@ const LoginForm: React.FC<Props> = () => {
     try {
       const result = await signIn('credentials', {
         ...data,
+        redirect: false,
       });
-      console.log(result);
+      if (!result?.ok) {
+        toast.error('Invalid credentials');
+      } else {
+        toast.success('Logged in successfully');
+        router.refresh();
+      }
     } catch (error) {
       console.log(error);
     }
@@ -70,6 +80,7 @@ const LoginForm: React.FC<Props> = () => {
             type='submit'
             variant='default'
             className='mt-2 py-4 text-sm font-medium tracking-wider'
+            isLoading={isLoading}
           >
             Login
           </Button>
