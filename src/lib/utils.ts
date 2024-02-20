@@ -23,3 +23,12 @@ export function fromatCurrency(amount: number, digits = 2) {
     maximumFractionDigits: digits,
   });
 }
+
+export function formatExpiry(expiry: string) {
+  if (!expiry) return '';
+  return `Exp ${expiry.slice(0, 2) + '/' + expiry.slice(2)}`;
+}
+
+export function formatCardNumber(cardNumber: string) {
+  return cardNumber.replace(/(\d{4})/g, '$1 ').trim();
+}

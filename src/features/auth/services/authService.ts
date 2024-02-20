@@ -55,6 +55,8 @@ async function register(input: RegisterSchemaType) {
       }
     );
 
+    console.log({ res });
+
     if (!res.ok) {
       throw new Error('Error registering user');
     }

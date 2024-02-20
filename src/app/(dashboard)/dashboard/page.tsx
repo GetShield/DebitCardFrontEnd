@@ -1,10 +1,10 @@
-import { transactions } from '@/data';
 import { Balance, Reload } from '@/features/balance';
 import { DebitCards, getCards } from '@/features/debit-card';
-import { TransactionsHistory } from '@/features/transactions';
+import { TransactionsHistory, getTransactions } from '@/features/transactions';
 
 export default async function Page() {
   const cards = await getCards();
+  const transactions = await getTransactions();
   return (
     <div className='my-14 flex h-full min-h-screen w-full flex-col divide-x divide-border rounded-md border border-border md:flex-row'>
       <div className='basis-2/6 divide-y divide-border'>
@@ -36,7 +36,7 @@ export default async function Page() {
           </p>
         </div>
         <div className='p-7'>
-          <TransactionsHistory transactions={transactions} />
+          <TransactionsHistory transactions={transactions.data} />
         </div>
       </div>
     </div>

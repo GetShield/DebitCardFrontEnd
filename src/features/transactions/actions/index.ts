@@ -2,13 +2,13 @@
 
 import { authOptions } from '@/lib';
 import { getServerSession } from 'next-auth';
-import { Card } from '../types';
+import { Transactions } from '../types';
 
-export const getCards = async (): Promise<Card[]> => {
+export const getTransactions = async (): Promise<Transactions> => {
   try {
     const session = await getServerSession(authOptions);
     const { accessToken } = session?.user;
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/cards`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/transactions`, {
       next: { revalidate: 1 },
       method: 'GET',
       headers: {
@@ -18,13 +18,18 @@ export const getCards = async (): Promise<Card[]> => {
     });
 
     if (!res.ok) {
-      throw new Error('Error fetching cards');
+      throw new Error('Error fetching transactions');
     }
 
-    const cards = await res.json();
-    return cards;
+    const transactions = await res.json();
+
+    console.log({ transactions });
+    return transactions;
   } catch (error) {
     console.error(error);
-    return [];
+    return {
+      page: { next: null },
+      data: [],
+    };
   }
 };
