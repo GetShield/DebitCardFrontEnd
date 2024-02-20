@@ -26,6 +26,8 @@ async function authenticate(
     const user = await res.json();
     const accessToken = user.token;
 
+    console.log({ user });
+
     return {
       name: user.user_name,
       id: user._id,

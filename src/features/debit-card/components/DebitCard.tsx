@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 
-import { LogoIcon, MasterCardIcon } from '@/assets';
+import { LogoIcon, VisaIcon } from '@/assets';
 import { formatCardNumber, formatExpiry } from '@/lib';
 import { toast } from 'sonner';
 import { Card } from '..';
@@ -40,7 +40,7 @@ const DebitCard: React.FC<Card> = ({
       <div className='absolute inset-0 tracking-wider'>
         <div className='h-[140px]'>
           <div className='flex items-center justify-between px-5 pt-5'>
-            <MasterCardIcon />
+            <VisaIcon className='h-14 w-14' />
             <LogoIcon className='scale-50' />
           </div>
           <div className='mt-4 flex justify-between'>

@@ -23,7 +23,6 @@ export const getTransactions = async (): Promise<Transactions> => {
 
     const transactions = await res.json();
 
-    console.log({ transactions });
     return transactions;
   } catch (error) {
     console.error(error);

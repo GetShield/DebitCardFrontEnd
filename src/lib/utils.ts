@@ -16,6 +16,15 @@ export function formatDate(date: string) {
   return `${day}`;
 }
 
+export function formatDateShort(date: string) {
+  const options: Intl.DateTimeFormatOptions = {
+    month: '2-digit',
+    day: '2-digit',
+  };
+  const formattedDate = new Date(date).toLocaleDateString('en-US', options);
+  return formattedDate;
+}
+
 export function fromatCurrency(amount: number, digits = 2) {
   return amount.toLocaleString('en-US', {
     style: 'currency',
@@ -24,9 +33,14 @@ export function fromatCurrency(amount: number, digits = 2) {
   });
 }
 
-export function formatExpiry(expiry: string) {
+export function formatExpiry(expiry: string | undefined) {
   if (!expiry) return '';
   return `Exp ${expiry.slice(0, 2) + '/' + expiry.slice(2)}`;
+}
+
+export function formatTransactionCardExpiry(expiry: string | undefined) {
+  if (!expiry) return '';
+  return `${expiry.slice(0, 2) + '/20' + expiry.slice(2)}`;
 }
 
 export function formatCardNumber(cardNumber: string) {

@@ -45,6 +45,9 @@ module.exports = {
           foreground: 'hsl(var(--card-foreground))',
         },
       },
+      screens: {
+        xs: '375px',
+      },
     },
   },
   plugins: [],
