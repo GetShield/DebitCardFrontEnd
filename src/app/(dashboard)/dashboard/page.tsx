@@ -1,12 +1,16 @@
-import { Balance, Reload } from '@/features/balance';
+import { BalanceDisplay, Reload, getBalances } from '@/features/balance';
 import { DebitCards, getCards, getCardsFromRamp } from '@/features/debit-card';
 import { TransactionsHistory, getTransactions } from '@/features/transactions';
+import { authOptions } from '@/lib';
+import { getServerSession } from 'next-auth';
 
 export default async function Page() {
-  const [cards, rampCards, transactions] = await Promise.all([
-    getCards(),
-    getCardsFromRamp(),
-    getTransactions(),
+  const session = await getServerSession(authOptions);
+  const [cards, rampCards, transactions, balances] = await Promise.all([
+    getCards(session),
+    getCardsFromRamp(session),
+    getTransactions(session),
+    getBalances(session),
   ]);
 
   return (
@@ -20,7 +24,7 @@ export default async function Page() {
         </div>
         <div className='flex flex-col items-center p-4 xs:p-7'>
           <DebitCards cards={cards} />
-          <Balance />
+          <BalanceDisplay />
         </div>
         <div className='flex w-full flex-col gap-2 p-7'>
           <h2 className='font-medium'>Reload</h2>

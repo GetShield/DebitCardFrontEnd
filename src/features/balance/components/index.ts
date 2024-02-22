@@ -1,5 +1,5 @@
-import Balance from './Balance';
+import BalanceDisplay from './BalanceDisplay';
 import CoinsAccepted from './CoinsAccepted';
 import Reload from './Reload';
 
-export { Balance, CoinsAccepted, Reload };
+export { BalanceDisplay, CoinsAccepted, Reload };

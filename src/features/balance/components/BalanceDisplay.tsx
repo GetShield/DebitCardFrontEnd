@@ -6,7 +6,7 @@ import { Coins } from '../types';
 
 interface Props {}
 
-const Balance: React.FC<Props> = () => {
+const BalanceDisplay: React.FC<Props> = () => {
   const [balanceSelected, setBalanceSelected] = useState(Coins.BTC);
 
   const COINS = [
@@ -57,4 +57,4 @@ const Balance: React.FC<Props> = () => {
   );
 };
 
-export default Balance;
+export default BalanceDisplay;

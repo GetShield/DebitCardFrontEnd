@@ -9,12 +9,13 @@ declare module 'next-auth' {
   interface JWT {
     accessToken?: string;
   }
-}
 
-declare module 'next-auth' {
   interface Session extends DefaultSession {
+    accessToken?: string;
     user: {
       id: string;
+      exp?: number;
     } & DefaultSession['user'];
+    isExpired?: boolean;
   }
 }

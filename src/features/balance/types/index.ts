@@ -15,3 +15,13 @@ export interface Wallet {
   address: string;
   acceptedCoins: Coins[];
 }
+
+// TODO: complete
+export interface Balance {
+  _id: string;
+  date: string;
+  amount: number;
+  crypto: string;
+  wallet: string;
+  blockchain: string;
+}

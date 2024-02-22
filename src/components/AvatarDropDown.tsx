@@ -1,14 +1,15 @@
 'use client';
 
-import { signOut, useSession } from 'next-auth/react';
+import { Session } from 'next-auth';
+import { signOut } from 'next-auth/react';
 import Image from 'next/image';
 import DropDown, { OptionProps } from './ui/DropDown';
 
-interface Props {}
+interface Props {
+  session: Session;
+}
 
-const AvatarDropDown: React.FC<Props> = () => {
-  const { data: session } = useSession();
-
+const AvatarDropDown: React.FC<Props> = ({ session }) => {
   const options: OptionProps[] = [
     {
       type: 'text',
@@ -26,6 +27,10 @@ const AvatarDropDown: React.FC<Props> = () => {
       onClick: () => signOut(),
     },
   ];
+
+  console.log(new Date(session.user.exp * 1000).toISOString());
+
+  console.log({ session });
 
   return (
     <DropDown options={options}>

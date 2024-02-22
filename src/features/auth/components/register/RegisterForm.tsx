@@ -37,7 +37,7 @@ const RegisterForm: React.FC<Props> = () => {
           ...data,
           redirect: false,
         });
-        router.refresh();
+        router.push('/dashboard');
       }
     } catch (error) {
       console.log(error);

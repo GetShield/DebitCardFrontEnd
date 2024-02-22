@@ -37,7 +37,7 @@ const LoginForm: React.FC<Props> = () => {
         toast.error('Invalid credentials');
       } else {
         toast.success('Logged in successfully');
-        router.refresh();
+        router.push('/dashboard');
       }
     } catch (error) {
       console.log(error);
@@ -53,6 +53,7 @@ const LoginForm: React.FC<Props> = () => {
             <span className='mb-2 mt-5 text-2xl font-bold'>Get started</span>
           </div>
           <Input
+            autoComplete='username'
             autoFocus
             placeholder='Enter your email address'
             {...register('email')}
@@ -65,6 +66,7 @@ const LoginForm: React.FC<Props> = () => {
             )}
           />
           <Input
+            autoComplete='current-password'
             placeholder='Enter your password'
             type='password'
             {...register('password')}

@@ -13,7 +13,7 @@ const QR: React.FC<Props> = ({ value }) => {
     navigator.clipboard
       .writeText(value)
       .then(() => {
-        toast.success('address copied to clipboard');
+        toast.success('Address copied to clipboard');
       })
       .catch((err) => {
         console.log(err.message);

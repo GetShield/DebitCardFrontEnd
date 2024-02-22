@@ -1,12 +1,10 @@
 'use server';
 
-import { authOptions } from '@/lib';
-import { getServerSession } from 'next-auth';
+import { Session } from 'next-auth';
 import { Card, RampCard } from '../types';
 
-export const getCards = async (): Promise<Card[]> => {
+export const getCards = async (session: Session | null): Promise<Card[]> => {
   try {
-    const session = await getServerSession(authOptions);
     const { accessToken } = session?.user;
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/cards`, {
       next: { revalidate: 1 },
@@ -29,9 +27,10 @@ export const getCards = async (): Promise<Card[]> => {
   }
 };
 
-export const getCardsFromRamp = async (): Promise<RampCard[]> => {
+export const getCardsFromRamp = async (
+  session: Session | null
+): Promise<RampCard[]> => {
   try {
-    const session = await getServerSession(authOptions);
     const { accessToken } = session?.user;
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/cards/ramp`, {
       next: { revalidate: 1 },
