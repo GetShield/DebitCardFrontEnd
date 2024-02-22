@@ -26,8 +26,6 @@ async function authenticate(
     const user = await res.json();
     const accessToken = user.token;
 
-    console.log({ user });
-
     return {
       name: user.user_name,
       id: user._id,
@@ -56,8 +54,6 @@ async function register(input: RegisterSchemaType) {
         body: JSON.stringify({ user_name, email, password }),
       }
     );
-
-    console.log({ res });
 
     if (!res.ok) {
       throw new Error('Error registering user');

@@ -7,7 +7,6 @@ export const getCards = async (session: Session | null): Promise<Card[]> => {
   try {
     const { accessToken } = session?.user;
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/cards`, {
-      next: { revalidate: 1 },
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -33,7 +32,6 @@ export const getCardsFromRamp = async (
   try {
     const { accessToken } = session?.user;
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/cards/ramp`, {
-      next: { revalidate: 1 },
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

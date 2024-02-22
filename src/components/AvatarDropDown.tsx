@@ -28,10 +28,6 @@ const AvatarDropDown: React.FC<Props> = ({ session }) => {
     },
   ];
 
-  console.log(new Date(session.user.exp * 1000).toISOString());
-
-  console.log({ session });
-
   return (
     <DropDown options={options}>
       <Image

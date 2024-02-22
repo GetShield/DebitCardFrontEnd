@@ -20,8 +20,6 @@ const StepTwo: React.FC<Props> = ({ form }) => {
   } = form;
   const { password } = getValues();
 
-  console.log({ errors, isSubmitting });
-
   return (
     <div className='m-auto flex w-96 max-w-[95vw] flex-col gap-2 rounded-lg border border-border p-4'>
       <div className='mb-5 flex flex-col items-center'>
@@ -29,6 +27,7 @@ const StepTwo: React.FC<Props> = ({ form }) => {
         <span className='mb-2 mt-5 text-2xl font-bold'>Choose a password</span>
       </div>
       <Input
+        autoComplete='new-password'
         placeholder='Choose a password'
         type='password'
         {...register('password')}
@@ -41,6 +40,7 @@ const StepTwo: React.FC<Props> = ({ form }) => {
         )}
       />
       <Input
+        autoComplete='new-password'
         placeholder='Confirm password'
         type='password'
         {...register('passwordConfirm', {

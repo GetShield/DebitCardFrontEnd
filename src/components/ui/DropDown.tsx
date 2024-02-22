@@ -32,11 +32,11 @@ const DropDown: React.FC<Props> = ({ children, options }) => {
         ></div>
       )}
       {isOpen && (
-        <div className='absolute right-0 mt-1 divide-y overflow-auto rounded-2xl border border-border bg-secondary text-sm'>
+        <div className='absolute right-0 mt-1 w-max divide-y overflow-auto rounded-2xl border border-border bg-secondary text-sm'>
           {options.map((option, index) => (
             <div
               key={index}
-              className={cn('w-full cursor-pointer px-4 py-2', {
+              className={cn('w-full min-w-fit cursor-pointer px-4 py-2', {
                 'bg-primary text-center text-secondary hover:bg-primary/90':
                   option.type === 'button',
               })}

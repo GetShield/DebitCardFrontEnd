@@ -9,19 +9,31 @@ export const Coins = {
 
 export type Coins = (typeof Coins)[keyof typeof Coins];
 
-export interface Wallet {
-  coin: Coins;
-  name: string;
-  address: string;
-  acceptedCoins: Coins[];
-}
-
-// TODO: complete
 export interface Balance {
   _id: string;
-  date: string;
-  amount: number;
+  blockchain: Blockchain;
   crypto: string;
-  wallet: string;
-  blockchain: string;
+  wallet: Wallet;
+  __v: number;
+  amount: number;
+}
+
+export interface Blockchain {
+  _id: string;
+  mainnet: boolean;
+  chainType: string;
+  name: string;
+  native_symbol: string;
+  description: string;
+  wallets: string[];
+  chainId?: number;
+}
+
+export interface Wallet {
+  _id: string;
+  date: string;
+  address: string;
+  blockchains: string[];
+  user: string;
+  __v: number;
 }

@@ -1,25 +1,30 @@
 'use client';
 
 import { BtcIcon, EthIcon, USIcon, UsdtIcon } from '@/assets';
-import { useState } from 'react';
-import { Coins } from '../types';
+import { Price } from '@/features/wallets';
+import { fromatCurrency } from '@/lib';
+import { Balance } from '../types';
 
-interface Props {}
+interface Props {
+  balances: Balance[];
+  prices: Price[];
+}
 
-const BalanceDisplay: React.FC<Props> = () => {
-  const [balanceSelected, setBalanceSelected] = useState(Coins.BTC);
-
+const BalanceDisplay: React.FC<Props> = ({ balances, prices }) => {
   const COINS = [
     { name: 'BTC', largeName: 'Bitcoin', icon: <BtcIcon /> },
     { name: 'ETH', largeName: 'Ethereum', icon: <EthIcon /> },
     { name: 'USDT', largeName: 'Tron', icon: <UsdtIcon /> },
   ];
 
-  const FAKE_BALANCES = {
-    BTC: 2.058,
-    ETH: 0,
-    USDT: 2300,
-  };
+  const totalBalance = balances.reduce((acc, balance) => {
+    const { price } = prices.find((price) => price.name === balance.crypto) || {
+      price: 0,
+    };
+    return acc + balance.amount * price;
+  }, 0);
+
+  const totalBalanceFormatted = fromatCurrency(totalBalance);
 
   return (
     <div className='w-full py-6 text-muted-foreground'>
@@ -27,11 +32,41 @@ const BalanceDisplay: React.FC<Props> = () => {
       <div className='mb-5 mt-2 flex items-center gap-5'>
         <USIcon className='scale-[2.0]' />
         <span className='text-3xl font-extrabold text-foreground'>
-          $47,642.00
+          {totalBalanceFormatted}
         </span>
       </div>
       <div className='flex flex-col gap-3 text-sm sm:text-base'>
-        <div className='flex items-center justify-between'>
+        {/* <div className='flex items-center justify-between'>
+          <span>Total Balance (BTC & USDT)</span>
+          <div className='flex items-center gap-1'>
+            <USIcon />
+            <span className='font-bold text-foreground'>
+              {totalBalanceFormatted}
+            </span>
+          </div>
+        </div> */}
+        {balances.map((balance) => {
+          const coin = COINS.find((coin) => coin.name === balance.crypto);
+          const { name, price } = prices.find(
+            (price) => price.name === balance.crypto
+          ) || { name: '', price: 0 };
+          return (
+            <div
+              key={balance._id}
+              className='flex items-center justify-between'
+            >
+              {balance.blockchain.description}
+              <div className='flex min-w-fit items-center gap-1'>
+                <div>{coin?.icon}</div>
+                <span className='font-bold text-foreground'>
+                  {balance.amount} {balance.crypto} | USD{' '}
+                  {fromatCurrency(balance.amount * price, 0)}
+                </span>
+              </div>
+            </div>
+          );
+        })}
+        {/* <div className='flex items-center justify-between'>
           <span>Total Balance (BTC & USDT)</span>
           <div className='flex items-center gap-1'>
             <USIcon />
@@ -51,7 +86,7 @@ const BalanceDisplay: React.FC<Props> = () => {
             <UsdtIcon />
             <span className='font-bold text-foreground'>$2,300 USDT</span>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

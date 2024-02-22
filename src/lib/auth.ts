@@ -31,10 +31,6 @@ export const authOptions: NextAuthOptions = {
     strategy: 'jwt',
   },
   callbacks: {
-    signIn({ user }) {
-      console.log('signIn', { user });
-      return true;
-    },
     async jwt({ token, account, profile, user }) {
       if (account && account.type === 'credentials') {
         token.userId = account.providerAccountId;

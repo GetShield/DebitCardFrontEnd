@@ -1,13 +1,12 @@
 import { Session } from 'next-auth';
-import { Balance } from '../types';
+import { Price } from '..';
 
-export const getBalances = async (
-  session: Session | null
-): Promise<Balance[]> => {
+export const getPrices = async (session: Session | null): Promise<Price[]> => {
   try {
+    console.log('getPrices');
     const { accessToken } = session?.user;
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/balances/get-by-current-user`,
+      `${process.env.NEXT_PUBLIC_API_URL}/wallets/price`,
       {
         method: 'GET',
         headers: {
@@ -18,11 +17,11 @@ export const getBalances = async (
     );
 
     if (!res.ok) {
-      throw new Error('Error fetching balances');
+      throw new Error('Error fetching prices');
     }
 
-    const data: { balances: Balance[] } = await res.json();
-    return data.balances;
+    const data: { data: Price[] } = await res.json();
+    return data.data;
   } catch (error) {
     console.error(error);
     return [];

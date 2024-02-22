@@ -1,6 +1,7 @@
-import { Coins, Wallet } from '@/features/balance';
+import { Coins } from '@/features/balance';
 
-export const WALLETS: Wallet[] = [
+// TODO: to be removed when wallets endpoint is ready
+export const WALLETS: any[] = [
   {
     coin: Coins.BTC,
     name: 'Bitcoin',

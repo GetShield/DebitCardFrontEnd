@@ -1,5 +1,5 @@
+import Reload from '../../wallets/components/Wallets';
 import BalanceDisplay from './BalanceDisplay';
-import CoinsAccepted from './CoinsAccepted';
-import Reload from './Reload';
+// import CoinsAccepted from './CoinsAccepted';
 
-export { BalanceDisplay, CoinsAccepted, Reload };
+export { BalanceDisplay, Reload };

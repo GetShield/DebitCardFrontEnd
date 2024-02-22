@@ -1,15 +1,15 @@
 'use client';
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { SubmitHandler, useForm } from 'react-hook-form';
-
-import { LogoIcon } from '@/assets';
-import { Button, Input } from '@/components';
 import { ErrorMessage } from '@hookform/error-message';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
+
+import { LogoIcon } from '@/assets';
+import { Button, Input } from '@/components';
 import { LoginSchema, LoginSchemaType } from '../..';
 
 interface Props {}
@@ -23,7 +23,7 @@ const LoginForm: React.FC<Props> = () => {
   });
   const {
     handleSubmit,
-    formState: { errors, isLoading },
+    formState: { errors, isSubmitting },
     register,
   } = form;
 
@@ -82,7 +82,7 @@ const LoginForm: React.FC<Props> = () => {
             type='submit'
             variant='default'
             className='mt-2 py-4 text-sm font-medium tracking-wider'
-            isLoading={isLoading}
+            isLoading={isSubmitting}
           >
             Login
           </Button>

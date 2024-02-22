@@ -9,7 +9,6 @@ export const getTransactions = async (
   try {
     const { accessToken } = session?.user;
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/transactions`, {
-      next: { revalidate: 1 },
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
