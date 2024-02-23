@@ -36,10 +36,13 @@ const DropDown: React.FC<Props> = ({ children, options }) => {
           {options.map((option, index) => (
             <div
               key={index}
-              className={cn('w-full min-w-fit cursor-pointer px-4 py-2', {
-                'bg-primary text-center text-secondary hover:bg-primary/90':
-                  option.type === 'button',
-              })}
+              className={cn(
+                'w-full min-w-fit max-w-[80vw] cursor-pointer px-4 py-2 sm:max-w-[240px]',
+                {
+                  'bg-primary text-center text-secondary hover:bg-primary/90':
+                    option.type === 'button',
+                }
+              )}
               onClick={() => handleSelect(option)}
             >
               {option.name}

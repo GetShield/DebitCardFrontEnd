@@ -13,7 +13,7 @@ const AvatarDropDown: React.FC<Props> = ({ session }) => {
   const options: OptionProps[] = [
     {
       type: 'text',
-      name: session?.user?.name,
+      name: 'session?.user?.name',
       onClick: () => {},
     },
     {
