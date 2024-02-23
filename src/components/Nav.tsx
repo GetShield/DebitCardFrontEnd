@@ -3,7 +3,7 @@ import { Session } from 'next-auth';
 import { AvatarDropDown } from '.';
 
 interface Props {
-  session: Session;
+  session: Session | null;
 }
 
 const Nav: React.FC<Props> = ({ session }) => {

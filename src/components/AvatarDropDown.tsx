@@ -6,7 +6,7 @@ import Image from 'next/image';
 import DropDown, { OptionProps } from './ui/DropDown';
 
 interface Props {
-  session: Session;
+  session: Session | null;
 }
 
 const AvatarDropDown: React.FC<Props> = ({ session }) => {
