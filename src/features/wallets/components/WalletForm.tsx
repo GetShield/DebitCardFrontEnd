@@ -42,6 +42,7 @@ const WalletForm: React.FC<Props> = ({ session, blockchain, onClose }) => {
         return;
       } else {
         toast.success('Wallet registered successfully!');
+        onClose();
         router.refresh();
       }
     } catch (error) {
