@@ -1,18 +1,25 @@
 'use client';
 
-import { QR } from '@/components';
-import { cn } from '@/lib';
 import { usePathname, useRouter } from 'next/navigation';
 import { format } from 'url';
+
+import { QR } from '@/components';
+import { cn } from '@/lib';
 import { UserWallet, Wallet } from '..';
 
 interface Props {
   reload: string;
   wallets: Wallet[];
   userWallets: UserWallet[];
+  searchParams: { [key: string]: string };
 }
 
-const Wallets: React.FC<Props> = ({ wallets, reload, userWallets }) => {
+const Wallets: React.FC<Props> = ({
+  wallets,
+  reload,
+  userWallets,
+  searchParams,
+}) => {
   const router = useRouter();
 
   const currentShieldWallet = wallets.find(
@@ -28,7 +35,7 @@ const Wallets: React.FC<Props> = ({ wallets, reload, userWallets }) => {
   const handleWalletSelected = (name: string) => {
     const url = format({
       pathname: pathname,
-      query: { reload: name },
+      query: { ...searchParams, reload: name },
     });
     router.replace(url, { scroll: false });
   };
@@ -56,9 +63,9 @@ const Wallets: React.FC<Props> = ({ wallets, reload, userWallets }) => {
       </div>
       {/* <CoinsAccepted acceptedCoins={walletSelected.acceptedCoins} /> */}
       <QR
-        value={currentShieldWallet?.address}
         userHasWallet={!!userHasWallet}
-        walletName={currentShieldWallet?.blockchains[0].description}
+        currentShieldWallet={currentShieldWallet}
+        searchParams={searchParams}
       />
     </div>
   );

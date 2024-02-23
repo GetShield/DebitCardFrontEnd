@@ -1,4 +1,5 @@
 import { Session } from 'next-auth';
+
 import { Price } from '..';
 
 export const getPrices = async (session: Session | null): Promise<Price[]> => {

@@ -4,6 +4,7 @@ import { BalanceDisplay, getBalances } from '@/features/balance';
 import { DebitCards, getCards, getCardsFromRamp } from '@/features/debit-card';
 import { TransactionsHistory, getTransactions } from '@/features/transactions';
 import {
+  WalletForm,
   Wallets,
   getPrices,
   getUserWallets,
@@ -15,10 +16,13 @@ import { redirect } from 'next/navigation';
 interface Props {
   searchParams: {
     reload: string;
+    register: string;
   };
 }
 
-export default async function Page({ searchParams: { reload } }: Props) {
+export default async function Page({ searchParams }: Props) {
+  const { reload, register } = searchParams;
+
   const session = await getServerSession(authOptions);
   const [
     cards,
@@ -46,6 +50,7 @@ export default async function Page({ searchParams: { reload } }: Props) {
 
   return (
     <div className='my-14 flex h-full min-h-screen w-full flex-col divide-x divide-border rounded-md border border-border lg:flex-row'>
+      {register && <WalletForm searchParams={searchParams} session={session} />}
       <div className='basis-2/6 divide-y divide-border'>
         <div className='flex flex-col gap-1 p-7'>
           <h2 className='font-medium'>Overview</h2>
@@ -65,9 +70,10 @@ export default async function Page({ searchParams: { reload } }: Props) {
         </div>
         <div className='flex flex-col items-center gap-2 p-7'>
           <Wallets
-            wallets={wallets}
             reload={reload}
+            searchParams={searchParams}
             userWallets={userWallets}
+            wallets={wallets}
           />
         </div>
       </div>

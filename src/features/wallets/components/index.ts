@@ -1,3 +1,4 @@
+import WalletForm from './WalletForm';
 import Wallets from './Wallets';
 
-export { Wallets };
+export { WalletForm, Wallets };
