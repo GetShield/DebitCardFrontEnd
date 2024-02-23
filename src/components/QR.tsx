@@ -4,24 +4,23 @@ import { Copy } from 'lucide-react';
 import QRCode from 'react-qr-code';
 import { toast } from 'sonner';
 
-import { Wallet } from '@/features/wallets';
-import { usePathname, useRouter } from 'next/navigation';
-import { format } from 'url';
+import { Wallet, WalletForm } from '@/features/wallets';
+import { Session } from 'next-auth';
+import { useState } from 'react';
 import { Button } from '.';
 
 interface Props {
   userHasWallet: boolean;
   currentShieldWallet: Wallet | undefined;
-  searchParams: { [key: string]: string };
+  session: Session | null;
 }
 
 const QR: React.FC<Props> = ({
   userHasWallet,
-  searchParams,
   currentShieldWallet,
+  session,
 }) => {
-  const router = useRouter();
-  const pathname = usePathname();
+  const [registerWallet, setRegisterWallet] = useState<null | string>(null);
 
   const value = currentShieldWallet?.address;
   const walletName = currentShieldWallet?.blockchains[0].name;
@@ -42,16 +41,15 @@ const QR: React.FC<Props> = ({
     }
   };
 
-  const handleRegisterWallet = () => {
-    const url = format({
-      pathname: pathname,
-      query: { ...searchParams, register: true },
-    });
-    router.replace(url, { scroll: false });
-  };
-
   return (
     <div className=''>
+      {registerWallet && (
+        <WalletForm
+          session={session}
+          onClose={() => setRegisterWallet(null)}
+          blockchain={registerWallet}
+        />
+      )}
       <div className='relative m-auto flex max-w-[340px] rounded-md bg-muted p-8'>
         {!userHasWallet && (
           <div className='absolute left-1/2 top-1/2 flex translate-x-[-50%] translate-y-[-50%] select-none rounded-sm bg-secondary p-1 text-center text-xs font-medium leading-5 text-red-500'>
@@ -78,7 +76,7 @@ const QR: React.FC<Props> = ({
       {!userHasWallet && (
         <Button
           className='mx-auto my-4 flex px-10 py-2.5'
-          onClick={() => handleRegisterWallet()}
+          onClick={() => setRegisterWallet(walletName || '')}
         >
           Register my {walletDescription} address
         </Button>

@@ -53,7 +53,7 @@ const BalanceDisplay: React.FC<Props> = ({ balances, prices }) => {
           return (
             <div
               key={balance._id}
-              className='flex items-center justify-between'
+              className='flex items-center justify-between gap-2'
             >
               {balance.blockchain.description}
               <div className='flex min-w-fit items-center gap-1'>

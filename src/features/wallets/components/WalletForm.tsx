@@ -1,32 +1,30 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
 import { Button, Input, Modal } from '@/components';
 import { ErrorMessage } from '@hookform/error-message';
 import { Session } from 'next-auth';
-import { format } from 'url';
 import { postWallet } from '..';
 import { WalletSchema, WalletSchemaType } from '../utils';
 
 interface Props {
   session: Session | null;
-  searchParams: { [key: string]: string };
+  blockchain: string;
+  onClose: () => void;
 }
 
-const WalletForm: React.FC<Props> = ({ session, searchParams }) => {
-  const { reload } = searchParams;
+const WalletForm: React.FC<Props> = ({ session, blockchain, onClose }) => {
   const router = useRouter();
-  const pathname = usePathname();
 
   const form = useForm<WalletSchemaType>({
     resolver: zodResolver(WalletSchema),
     mode: 'onChange',
     defaultValues: {
-      blockchains: [reload],
+      blockchains: [blockchain],
       address: '',
     },
   });
@@ -45,24 +43,14 @@ const WalletForm: React.FC<Props> = ({ session, searchParams }) => {
       } else {
         toast.success('Wallet registered successfully!');
         router.refresh();
-        handleClose();
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleClose = () => {
-    const { register, ...restSearchParams } = searchParams;
-    const url = format({
-      pathname: pathname,
-      query: { ...restSearchParams },
-    });
-    router.replace(url, { scroll: false });
-  };
-
   return (
-    <Modal onClose={handleClose}>
+    <Modal onClose={onClose}>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className='m-auto flex w-96 flex-col gap-2 rounded-md border border-border bg-background p-8 shadow-lg'
@@ -70,12 +58,12 @@ const WalletForm: React.FC<Props> = ({ session, searchParams }) => {
         <span>
           <h2 className='font-medium'>Register Wallet</h2>
           <p className='text-sm text-muted-foreground'>
-            Register your to be able to reload your balance
+            Register your {blockchain} address to be able to reload your balance
           </p>
         </span>
         <Input
           type='text'
-          value={reload}
+          value={blockchain}
           disabled
           {...register('blockchains')}
         />
@@ -88,7 +76,7 @@ const WalletForm: React.FC<Props> = ({ session, searchParams }) => {
         />
         <Input
           autoFocus
-          placeholder={`Enter your ${reload} address`}
+          placeholder={`Enter your ${blockchain} address`}
           required
           {...register('address')}
         />
