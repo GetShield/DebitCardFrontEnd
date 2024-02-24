@@ -50,7 +50,7 @@ const QR: React.FC<Props> = ({ userWallet, currentShieldWallet, session }) => {
       {userHasWallet && (
         <span className='mx-auto mb-4 flex w-fit flex-wrap gap-x-2 text-sm'>
           <span className='font-semibold'>Send From:</span>
-          <span className='font-medium text-foreground'>
+          <span className='font-medium text-green-500'>
             {userWallet?.address}
           </span>
         </span>

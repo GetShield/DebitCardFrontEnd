@@ -1,12 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-
 import { BtcIcon, EthIcon, USIcon, UsdtIcon } from '@/assets';
 import { Price } from '@/features/wallets';
 import { fromatCurrency } from '@/lib';
 import { Session } from 'next-auth';
-import { getBalances } from '..';
 import { Balance } from '../types';
 
 interface Props {
@@ -20,7 +17,8 @@ const BalanceDisplay: React.FC<Props> = ({
   initialBalances,
   session,
 }) => {
-  const [balances, setBalances] = useState<Balance[]>(initialBalances);
+  const balances = initialBalances;
+  // const [balances, setBalances] = useState<Balance[]>(initialBalances);
 
   const COINS = [
     { name: 'BTC', largeName: 'Bitcoin', icon: <BtcIcon /> },
@@ -37,19 +35,19 @@ const BalanceDisplay: React.FC<Props> = ({
 
   const totalBalanceFormatted = fromatCurrency(totalBalance);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const fetchBalances = async () => {
-        const newBalances = await getBalances(session);
-        setBalances(newBalances);
-      };
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     const fetchBalances = async () => {
+  //       const newBalances = await getBalances(session);
+  //       setBalances(newBalances);
+  //     };
 
-      fetchBalances();
-    }, 10000);
+  //     fetchBalances();
+  //   }, 10000);
 
-    return () => clearInterval(interval);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  //   return () => clearInterval(interval);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   return (
     <div className='w-full py-6 text-muted-foreground'>
