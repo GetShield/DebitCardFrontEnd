@@ -23,14 +23,15 @@ export const postWallet = async ({ session, data }: Props): Promise<any> => {
       }
     );
 
+    const result = await res.json();
+
     if (!res.ok) {
-      throw new Error('Error fetching prices');
+      throw new Error(result.message || 'Error fetching prices');
     }
 
-    const result = await res.json();
     return result;
   } catch (error) {
     console.error(error);
-    return null;
+    throw error;
   }
 };

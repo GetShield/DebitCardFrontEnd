@@ -4,28 +4,25 @@ import { Copy } from 'lucide-react';
 import QRCode from 'react-qr-code';
 import { toast } from 'sonner';
 
-import { Wallet, WalletForm } from '@/features/wallets';
+import { UserWallet, Wallet, WalletForm } from '@/features/wallets';
 import { Session } from 'next-auth';
 import { useState } from 'react';
 import { Button } from '.';
 
 interface Props {
-  userHasWallet: boolean;
+  userWallet: UserWallet | undefined;
   currentShieldWallet: Wallet | undefined;
   session: Session | null;
 }
 
-const QR: React.FC<Props> = ({
-  userHasWallet,
-  currentShieldWallet,
-  session,
-}) => {
+const QR: React.FC<Props> = ({ userWallet, currentShieldWallet, session }) => {
   const [registerWallet, setRegisterWallet] = useState<null | string>(null);
 
+  const userHasWallet = !!userWallet;
   const value = currentShieldWallet?.address;
   const walletName = currentShieldWallet?.blockchains[0].name;
   const walletDescription = currentShieldWallet?.blockchains[0].description;
-
+  console.log({ userWallet });
   if (!value) {
     return null;
   }
@@ -50,6 +47,14 @@ const QR: React.FC<Props> = ({
           blockchain={registerWallet}
         />
       )}
+      {userHasWallet && (
+        <span className='mx-auto mb-4 flex w-fit flex-wrap gap-x-2 text-sm'>
+          <span className='font-semibold'>Send From:</span>
+          <span className='font-medium text-foreground'>
+            {userWallet?.address}
+          </span>
+        </span>
+      )}
       <div className='relative m-auto flex max-w-[340px] rounded-md bg-muted p-8'>
         {!userHasWallet && (
           <div className='absolute left-1/2 top-1/2 flex translate-x-[-50%] translate-y-[-50%] select-none rounded-sm bg-secondary p-1 text-center text-xs font-medium leading-5 text-red-500'>
@@ -65,12 +70,17 @@ const QR: React.FC<Props> = ({
         />
       </div>
       {userHasWallet && (
-        <div
-          className='mx-auto mt-4 flex w-[340px] cursor-pointer items-center gap-2 overflow-hidden rounded-3xl border border-gray-500/50 px-4 py-2 text-xs hover:bg-muted-foreground/10 active:bg-muted-foreground/20'
-          onClick={copyCode}
-        >
-          <span className='w-full overflow-hidden text-ellipsis'>{value}</span>{' '}
-          <Copy className='ml-auto h-3 text-foreground' />
+        <div className='mx-auto mt-4 flex w-fit items-center gap-1 '>
+          <span className='font-semibold'>To</span>
+          <div
+            className='mx-auto flex w-[340px] cursor-pointer items-center gap-2 overflow-hidden rounded-3xl border border-gray-500/50 px-4 py-2 text-xs hover:bg-muted-foreground/10 active:bg-muted-foreground/20'
+            onClick={copyCode}
+          >
+            <span className='w-full overflow-hidden text-ellipsis'>
+              {value}
+            </span>{' '}
+            <Copy className='ml-auto h-3 text-foreground' />
+          </div>
         </div>
       )}
       {!userHasWallet && (

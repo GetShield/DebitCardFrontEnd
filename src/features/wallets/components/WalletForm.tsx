@@ -37,16 +37,12 @@ const WalletForm: React.FC<Props> = ({ session, blockchain, onClose }) => {
   const onSubmit: SubmitHandler<WalletSchemaType> = async (data) => {
     try {
       const res = await postWallet({ session, data });
-      if (!res) {
-        toast.error('Could not register wallet. Please try again.');
-        return;
-      } else {
-        toast.success('Wallet registered successfully!');
-        onClose();
-        router.refresh();
-      }
+      toast.success('Wallet registered successfully!');
+      onClose();
+      router.refresh();
     } catch (error) {
       console.log(error);
+      toast.error('Could not register wallet. Please try again.');
     }
   };
 

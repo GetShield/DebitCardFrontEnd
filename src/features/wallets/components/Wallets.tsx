@@ -19,7 +19,7 @@ const Wallets: React.FC<Props> = ({ wallets, userWallets, session }) => {
     (wallet) => wallet.blockchains[0].name === reload
   );
 
-  const userHasWallet = userWallets.find((wallet) =>
+  const userWallet = userWallets.find((wallet) =>
     wallet.blockchains.find((blockchain) => blockchain.name === reload)
   );
 
@@ -46,7 +46,7 @@ const Wallets: React.FC<Props> = ({ wallets, userWallets, session }) => {
       </div>
       {/* <CoinsAccepted acceptedCoins={walletSelected.acceptedCoins} /> */}
       <QR
-        userHasWallet={!!userHasWallet}
+        userWallet={userWallet}
         currentShieldWallet={currentShieldWallet}
         session={session}
       />

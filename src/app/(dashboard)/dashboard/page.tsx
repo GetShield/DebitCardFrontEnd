@@ -4,21 +4,16 @@ import { BalanceDisplay, getBalances } from '@/features/balance';
 import { DebitCards, getCards, getCardsFromRamp } from '@/features/debit-card';
 import { TransactionsHistory, getTransactions } from '@/features/transactions';
 import {
-  WalletForm,
   Wallets,
   getPrices,
   getUserWallets,
   getWallets,
 } from '@/features/wallets';
 import { authOptions } from '@/lib';
-import { redirect } from 'next/navigation';
 
-interface Props {
- 
-}
+interface Props {}
 
-export default async function Page({ }: Props) {
-
+export default async function Page({}: Props) {
   const session = await getServerSession(authOptions);
   const [
     cards,
@@ -49,7 +44,11 @@ export default async function Page({ }: Props) {
         </div>
         <div className='flex flex-col items-center p-4 xs:p-7'>
           <DebitCards cards={cards} />
-          <BalanceDisplay balances={balances} prices={prices} />
+          <BalanceDisplay
+            prices={prices}
+            session={session}
+            initialBalances={balances}
+          />
         </div>
         <div className='flex w-full flex-col gap-2 p-7'>
           <h2 className='font-medium'>Reload</h2>
