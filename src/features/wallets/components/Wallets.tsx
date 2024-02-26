@@ -25,7 +25,7 @@ const Wallets: React.FC<Props> = ({ wallets, userWallets, session }) => {
 
   return (
     <div className='flex w-full flex-col gap-8'>
-      <div className='flex w-full flex-wrap items-center divide-y divide-muted-foreground/50 overflow-auto rounded-3xl border border-muted-foreground/50'>
+      <div className='flex w-full items-center divide-x divide-muted-foreground/50 overflow-auto rounded-3xl border border-muted-foreground/50'>
         {wallets.map((wallet, index) => {
           return (
             <button
