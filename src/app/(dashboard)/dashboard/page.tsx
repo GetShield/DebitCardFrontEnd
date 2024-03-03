@@ -73,7 +73,7 @@ export default async function Page({}: Props) {
         </div>
         <div className='p-4 sm:p-7'>
           <TransactionsHistory
-            transactions={transactions.data}
+            transactions={transactions}
             rampCards={rampCards}
           />
         </div>

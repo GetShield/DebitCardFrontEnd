@@ -48,9 +48,9 @@ const QR: React.FC<Props> = ({ userWallet, currentShieldWallet, session }) => {
         />
       )}
       {userHasWallet && (
-        <div className='mx-auto mb-4 flex w-fit flex-wrap gap-x-2 text-sm'>
+        <div className='mx-auto mb-4 flex w-full flex-col gap-x-2 text-sm'>
           <span className='font-semibold'>Send From:</span>
-          <span className='text-xs font-medium text-green-500'>
+          <span className='mx-auto flex w-fit text-xs font-medium text-green-500'>
             {userWallet?.address}
           </span>
         </div>
@@ -71,7 +71,7 @@ const QR: React.FC<Props> = ({ userWallet, currentShieldWallet, session }) => {
       </div>
       {userHasWallet && (
         <div className='mx-auto mt-4 flex w-auto max-w-[340px] flex-wrap gap-x-2 text-sm'>
-          <span className='font-semibold'>To:</span>
+          <span className='font-semibold'>Send To:</span>
           <div
             className='mx-auto flex cursor-pointer items-center gap-2 overflow-hidden rounded-3xl border border-gray-500/50 px-4 py-2 text-xs hover:bg-muted-foreground/10 active:bg-muted-foreground/20'
             onClick={copyCode}

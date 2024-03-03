@@ -1,12 +1,3 @@
-export interface Transactions {
-  page: Page;
-  data: Transaction[];
-}
-
-export interface Page {
-  next: any;
-}
-
 export interface Transaction {
   sk_category_id: number;
   card_id: string;

@@ -23,9 +23,10 @@ export const getBalances = async (
     }
 
     const data: { balances: Balance[] } = await res.json();
-    const filteredBalances = data.balances.filter(
-      (b) => !b.blockchain.description.toLowerCase().includes('testnet')
-    );
+    const filteredBalances = data.balances;
+    // const filteredBalances = data.balances.filter(
+    //   (b) => !b.blockchain.description.toLowerCase().includes('testnet')
+    // );
     return filteredBalances;
   } catch (error) {
     console.error(error);

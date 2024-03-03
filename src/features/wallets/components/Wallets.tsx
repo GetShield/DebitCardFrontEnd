@@ -23,9 +23,19 @@ const Wallets: React.FC<Props> = ({ wallets, userWallets, session }) => {
     wallet.blockchains.find((blockchain) => blockchain.name === reload)
   );
 
+  const walletsLength = wallets.length;
+
   return (
     <div className='flex w-full flex-col gap-8'>
-      <div className='flex w-full items-center divide-x divide-muted-foreground/50 overflow-auto rounded-3xl border border-muted-foreground/50'>
+      <div
+        className={cn(
+          'flex w-full items-center divide-muted-foreground/50 overflow-auto rounded-3xl border border-muted-foreground/50',
+          {
+            'flex-wrap divide-y': walletsLength > 3,
+            'divide-x': walletsLength < 4,
+          }
+        )}
+      >
         {wallets.map((wallet, index) => {
           return (
             <button

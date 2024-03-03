@@ -50,8 +50,11 @@ const BalanceDisplay: React.FC<Props> = ({
   // }, []);
 
   return (
-    <div className='w-full py-6 text-muted-foreground'>
+    <div className='flex w-full flex-col py-6 text-muted-foreground'>
       <span>You balance</span>
+      <span className='select-none text-xs'>
+        Balances are updated every 5 minutes
+      </span>
       <div className='mb-5 mt-2 flex items-center gap-5'>
         <USIcon className='scale-[2.0]' />
         <span className='text-3xl font-extrabold text-foreground'>

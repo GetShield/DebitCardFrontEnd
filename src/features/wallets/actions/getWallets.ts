@@ -22,9 +22,10 @@ export const getWallets = async (
     }
 
     const data: { wallet: Wallet[] } = await res.json();
-    const filteredWallets = data.wallet.filter(
-      (w) => !w.blockchains[0].description.toLowerCase().includes('testnet')
-    );
+    const filteredWallets = data.wallet;
+    // const filteredWallets = data.wallet.filter(
+    //   (w) => !w.blockchains[0].description.toLowerCase().includes('testnet')
+    // );
     return filteredWallets;
   } catch (error) {
     console.error(error);
