@@ -51,7 +51,7 @@ const BalanceDisplay: React.FC<Props> = ({
 
   return (
     <div className='flex w-full flex-col py-6 text-muted-foreground'>
-      <span>You balance</span>
+      <span>Your balance</span>
       <span className='select-none text-xs'>
         Balances are updated every 5 minutes
       </span>

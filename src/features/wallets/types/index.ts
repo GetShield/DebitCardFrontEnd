@@ -9,32 +9,30 @@ export interface Wallet {
 
 export interface WalletBlockchain {
   _id: string;
-  mainnet: boolean;
-  chainType: string;
-  name: string;
-  native_symbol: string;
-  description: string;
-  wallets: string[];
+  chain: string;
   chainId?: number;
+  nativeSymbol: string;
+  chainType: string;
+  wallets: string[];
+  __v: number;
 }
 
 export interface UserWallet {
   _id: string;
-  date: string;
   address: string;
   blockchains: Blockchain[];
   user: string;
+  date: string;
   __v: number;
 }
 
 export interface Blockchain {
   _id: string;
-  mainnet: boolean;
+  chain: string;
+  nativeSymbol: string;
   chainType: string;
-  name: string;
-  native_symbol: string;
   wallets: string[];
-  chainId?: number;
+  __v: number;
 }
 
 export interface Price {

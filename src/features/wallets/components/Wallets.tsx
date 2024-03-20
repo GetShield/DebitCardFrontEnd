@@ -1,9 +1,11 @@
 'use client';
 
-import { QR } from '@/components';
-import { cn } from '@/lib';
 import { Session } from 'next-auth';
 import { useState } from 'react';
+
+import { QR } from '@/components';
+import { cn } from '@/lib';
+
 import { UserWallet, Wallet } from '..';
 
 interface Props {
@@ -16,11 +18,11 @@ const Wallets: React.FC<Props> = ({ wallets, userWallets, session }) => {
   const [reload, setReload] = useState('');
 
   const currentShieldWallet = wallets.find(
-    (wallet) => wallet.blockchains[0].name === reload
+    (wallet) => wallet.blockchains[0].chain === reload
   );
 
   const userWallet = userWallets.find((wallet) =>
-    wallet.blockchains.find((blockchain) => blockchain.name === reload)
+    wallet.blockchains.find((blockchain) => blockchain.chain === reload)
   );
 
   const walletsLength = wallets.length;
@@ -44,12 +46,12 @@ const Wallets: React.FC<Props> = ({ wallets, userWallets, session }) => {
                 'flex w-full min-w-24 select-none items-center justify-center px-6 py-1.5 text-center font-medium text-foreground hover:bg-muted-foreground/10 active:bg-muted-foreground/20',
                 {
                   'bg-muted-foreground/10':
-                    reload === wallet.blockchains[0].name,
+                    reload === wallet.blockchains[0].chain,
                 }
               )}
-              onClick={() => setReload(wallet.blockchains[0].name)}
+              onClick={() => setReload(wallet.blockchains[0].chain)}
             >
-              {wallet.blockchains[0].description}
+              {wallet.blockchains[0].chain}
             </button>
           );
         })}

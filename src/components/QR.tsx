@@ -1,12 +1,12 @@
 'use client';
 
 import { Copy } from 'lucide-react';
+import { Session } from 'next-auth';
+import { useState } from 'react';
 import QRCode from 'react-qr-code';
 import { toast } from 'sonner';
 
 import { UserWallet, Wallet, WalletForm } from '@/features/wallets';
-import { Session } from 'next-auth';
-import { useState } from 'react';
 import { Button } from '.';
 
 interface Props {
@@ -20,9 +20,9 @@ const QR: React.FC<Props> = ({ userWallet, currentShieldWallet, session }) => {
 
   const userHasWallet = !!userWallet;
   const value = currentShieldWallet?.address;
-  const walletName = currentShieldWallet?.blockchains[0].name;
-  const walletDescription = currentShieldWallet?.blockchains[0].description;
-  console.log({ userWallet });
+  const walletName = currentShieldWallet?.blockchains[0].chain;
+  const walletDescription = currentShieldWallet?.blockchains[0].chain;
+
   if (!value) {
     return null;
   }

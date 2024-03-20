@@ -9,13 +9,16 @@ export const getTransactions = async (
 ): Promise<Transaction[]> => {
   try {
     const { accessToken } = session?.user;
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/transactions`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/transactions/ramp/get-by-current-user`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
 
     if (!res.ok) {
       throw new Error('Error fetching transactions');
