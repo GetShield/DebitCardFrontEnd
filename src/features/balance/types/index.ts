@@ -11,29 +11,28 @@ export type Coins = (typeof Coins)[keyof typeof Coins];
 
 export interface Balance {
   _id: string;
-  blockchain: Blockchain;
-  crypto: string;
   wallet: Wallet;
+  blockchain: Blockchain;
+  currency: string;
   __v: number;
   amount: number;
 }
 
 export interface Blockchain {
   _id: string;
-  mainnet: boolean;
+  chain: string;
+  chainId: number;
+  nativeSymbol: string;
   chainType: string;
-  name: string;
-  native_symbol: string;
-  description: string;
   wallets: string[];
-  chainId?: number;
+  __v: number;
 }
 
 export interface Wallet {
   _id: string;
-  date: string;
   address: string;
   blockchains: string[];
   user: string;
+  date: string;
   __v: number;
 }

@@ -27,7 +27,9 @@ const BalanceDisplay: React.FC<Props> = ({
   ];
 
   const totalBalance = balances?.reduce((acc, balance) => {
-    const { price } = prices.find((price) => price.name === balance.crypto) || {
+    const { price } = prices.find(
+      (price) => price.name === balance.blockchain.nativeSymbol
+    ) || {
       price: 0,
     };
     return acc + balance.amount * price;
@@ -72,20 +74,20 @@ const BalanceDisplay: React.FC<Props> = ({
           </div>
         </div> */}
         {balances.map((balance) => {
-          const coin = COINS.find((coin) => coin.name === balance.crypto);
+          const coin = COINS.find((coin) => coin.name === balance.currency);
           const { name, price } = prices.find(
-            (price) => price.name === balance.crypto
+            (price) => price.name === balance.currency
           ) || { name: '', price: 0 };
           return (
             <div
               key={balance._id}
               className='flex items-center justify-between gap-2'
             >
-              {balance.blockchain.description}
+              {balance.blockchain.chain}
               <div className='flex min-w-fit items-center gap-1'>
                 <div>{coin?.icon}</div>
                 <span className='font-bold text-foreground'>
-                  {balance.amount} {balance.crypto} | USD{' '}
+                  {balance.amount} {balance.blockchain.chain} | USD{' '}
                   {fromatCurrency(balance.amount * price, 0)}
                 </span>
               </div>
