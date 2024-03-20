@@ -1,9 +1,11 @@
 'use client';
 
+import { Session } from 'next-auth';
+
 import { BtcIcon, EthIcon, USIcon, UsdtIcon } from '@/assets';
 import { Price } from '@/features/wallets';
 import { fromatCurrency } from '@/lib';
-import { Session } from 'next-auth';
+
 import { Balance } from '../types';
 
 interface Props {

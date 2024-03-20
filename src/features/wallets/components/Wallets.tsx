@@ -17,6 +17,8 @@ interface Props {
 const Wallets: React.FC<Props> = ({ wallets, userWallets, session }) => {
   const [reload, setReload] = useState('');
 
+  console.log({ wallets });
+
   const currentShieldWallet = wallets.find(
     (wallet) => wallet.blockchains[0].chain === reload
   );

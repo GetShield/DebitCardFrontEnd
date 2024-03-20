@@ -21,8 +21,8 @@ export const getWallets = async (
       throw new Error('Error fetching wallets');
     }
 
-    const data: { wallet: Wallet[] } = await res.json();
-    const filteredWallets = data.wallet;
+    const data: { wallets: Wallet[] } = await res.json();
+    const filteredWallets = data.wallets;
     // const filteredWallets = data.wallet.filter(
     //   (w) => !w.blockchains[0].description.toLowerCase().includes('testnet')
     // );
@@ -54,8 +54,8 @@ export const getUserWallets = async (
       throw new Error('Error fetching userWallets');
     }
 
-    const data: { wallet: UserWallet[] } = await res.json();
-    return data.wallet;
+    const data: { wallets: UserWallet[] } = await res.json();
+    return data.wallets;
   } catch (error) {
     console.error(error);
     return [];
