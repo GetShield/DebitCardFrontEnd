@@ -1,3 +1,4 @@
+import { Price } from '@/features/wallets';
 import clsx, { ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -33,6 +34,13 @@ export function fromatCurrency(amount: number, digits = 2) {
   });
 }
 
+export function formatCrypto(amount: number, digits = 2) {
+  return amount.toLocaleString('en-US', {
+    style: 'decimal',
+    maximumFractionDigits: digits,
+  });
+}
+
 export function formatExpiry(expiry: string | undefined) {
   if (!expiry) return '';
   return `Exp ${expiry.slice(0, 2) + '/' + expiry.slice(2)}`;
@@ -46,3 +54,10 @@ export function formatTransactionCardExpiry(expiry: string | undefined) {
 export function formatCardNumber(cardNumber: string) {
   return cardNumber.replace(/(\d{4})/g, '$1 ').trim();
 }
+
+export const findPrice = (nativeSymbol: string, prices: Price[]) => {
+  const { price } = prices.find((price) => price.name === nativeSymbol) || {
+    price: 0,
+  };
+  return price;
+};
