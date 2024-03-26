@@ -61,7 +61,7 @@ const BalanceDisplay: React.FC<Props> = ({
               <div className='flex items-center gap-1'>
                 <div>{coin?.icon}</div>
                 <div className='flex flex-wrap gap-1 font-bold text-foreground'>
-                  <span>{formatCrypto(balance.amount, 5)}</span>{' '}
+                  <span>{formatCrypto(balance.amount, 6)}</span>{' '}
                   <span>{balance.blockchain.chain}</span> |{' '}
                   <span>USD {fromatCurrency(balance.amount * price, 2)}</span>
                 </div>

@@ -1,9 +1,12 @@
 'use client';
 
-import { cn } from '@/lib';
 import { useState } from 'react';
-import { Card } from '..';
+
+import { cn } from '@/lib';
+
 import DebitCard from './DebitCard';
+
+import { Card } from '..';
 
 interface Pops {
   cards: Card[];
@@ -20,7 +23,7 @@ const DebitCards: React.FC<Pops> = ({ cards }) => {
       <DebitCard {...currentCard} />
       {cards.length > 1 && (
         <div className='flex items-center gap-2'>
-          {cards.map((card, index) => (
+          {cards.map((_card, index) => (
             <div
               key={index}
               className={cn(

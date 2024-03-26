@@ -1,10 +1,11 @@
 'use client';
 
 import Image from 'next/image';
+import { toast } from 'sonner';
 
 import { LogoIcon, VisaWhiteIcon } from '@/assets';
 import { formatCardNumber, formatExpiry } from '@/lib';
-import { toast } from 'sonner';
+
 import { Card } from '..';
 
 const DebitCard: React.FC<Card> = ({
