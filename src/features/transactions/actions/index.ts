@@ -2,6 +2,8 @@
 
 import { Session } from 'next-auth';
 
+import { env } from '@/config';
+
 import { Transaction } from '..';
 
 export const getTransactions = async (
@@ -10,7 +12,7 @@ export const getTransactions = async (
   try {
     const { accessToken } = session?.user;
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/transactions/ramp/get-by-current-user`,
+      `${env.NEXT_PUBLIC_API_URL}/transactions/ramp/get-by-current-user`,
       {
         method: 'GET',
         headers: {

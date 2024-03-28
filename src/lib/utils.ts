@@ -91,7 +91,8 @@ export function handleSubmissionSuccess(successMessage: string): void {
 
 export function validateResponse(response: any, message: string) {
   if (!response.ok) {
-    throw new Error(`${message}: ${response.status} - ${response.statusText}`);
+    console.error(`${message}: ${response.status} - ${response.statusText}`);
+    throw new Error(message);
   }
 }
 

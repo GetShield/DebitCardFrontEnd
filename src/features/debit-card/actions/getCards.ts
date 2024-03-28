@@ -1,12 +1,15 @@
 'use server';
 
 import { Session } from 'next-auth';
+
+import { env } from '@/config';
+
 import { Card, RampCard } from '../types';
 
 export const getCards = async (session: Session | null): Promise<Card[]> => {
   try {
     const { accessToken } = session?.user;
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/cards`, {
+    const res = await fetch(`${env.NEXT_PUBLIC_API_URL}/cards`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -31,7 +34,7 @@ export const getCardsFromRamp = async (
 ): Promise<RampCard[]> => {
   try {
     const { accessToken } = session?.user;
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/cards/ramp`, {
+    const res = await fetch(`${env.NEXT_PUBLIC_API_URL}/cards/ramp`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

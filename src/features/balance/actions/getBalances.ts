@@ -1,4 +1,7 @@
 import { Session } from 'next-auth';
+
+import { env } from '@/config';
+
 import { Balance } from '../types';
 
 export const getBalances = async (
@@ -8,7 +11,7 @@ export const getBalances = async (
     console.log('getBalances');
     const { accessToken } = session?.user;
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/balances/get-by-current-user`,
+      `${env.NEXT_PUBLIC_API_URL}/balances/get-by-current-user`,
       {
         method: 'GET',
         headers: {

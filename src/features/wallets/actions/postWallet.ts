@@ -1,6 +1,8 @@
 import { Session } from 'next-auth';
 
+import { env } from '@/config';
 import { handleError } from '@/lib';
+
 import { WalletSchemaType } from '../utils';
 
 interface Props {
@@ -13,7 +15,7 @@ export const postWallet = async ({ session, data }: Props): Promise<any> => {
     console.log('postWallet');
     const { accessToken } = session?.user;
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/wallets/create-for-current-user`,
+      `${env.NEXT_PUBLIC_API_URL}/wallets/create-for-current-user`,
       {
         method: 'POST',
         headers: {

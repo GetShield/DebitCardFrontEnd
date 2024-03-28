@@ -1,6 +1,7 @@
 import { getServerSession, type NextAuthOptions } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 
+import { env } from '@/config';
 import { userService } from '@/features/auth';
 
 interface JWTPayload {
@@ -25,7 +26,7 @@ function jwtDecode(token: string): JWTPayload {
 }
 
 export const authOptions: NextAuthOptions = {
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: env.NEXTAUTH_SECRET,
   session: {
     maxAge: 60 * 60, // 1 hour (if the user is inactive for 1 hour, the session will expire)
     strategy: 'jwt',

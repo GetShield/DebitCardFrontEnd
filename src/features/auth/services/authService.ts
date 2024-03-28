@@ -1,3 +1,4 @@
+import { env } from '@/config';
 import { handleError, validateResponse } from '@/lib';
 import { RegisterSchemaType } from '..';
 
@@ -12,7 +13,7 @@ async function authenticate(
   try {
     const { email, password } = credentials || {};
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
+    const res = await fetch(`${env.NEXT_PUBLIC_API_URL}/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -40,16 +41,15 @@ async function register(input: RegisterSchemaType) {
   try {
     const { email, password, user_name } = input;
 
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/auth/register`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ user_name, email, password }),
-      }
-    );
+    console.log({ env });
+
+    const res = await fetch(`${env.NEXT_PUBLIC_API_URL}/auth/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ user_name, email, password }),
+    });
 
     validateResponse(res, 'Error registering user');
 
