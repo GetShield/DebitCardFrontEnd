@@ -6,9 +6,8 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { userService } from '@/features/auth';
 import { handleSubmissionError, handleSubmissionSuccess } from '@/lib';
-import { RegisterSchema, RegisterSchemaType } from '../..';
+import { RegisterSchema, RegisterSchemaType, register } from '../..';
 import StepOne from './StepOne';
 import StepTwo from './StepTwo';
 import Steps from './Steps';
@@ -27,7 +26,7 @@ const RegisterForm: React.FC<Props> = () => {
 
   const onSubmit: SubmitHandler<RegisterSchemaType> = async (data) => {
     try {
-      await userService.register(data);
+      await register(data);
 
       handleSubmissionSuccess('Registered successfully');
       await signIn('credentials', {

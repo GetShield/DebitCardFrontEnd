@@ -2,7 +2,7 @@ import { getServerSession, type NextAuthOptions } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 
 import { env } from '@/config';
-import { userService } from '@/features/auth';
+import { authenticate } from '@/features/auth';
 
 interface JWTPayload {
   id: string;
@@ -69,7 +69,7 @@ export const authOptions: NextAuthOptions = {
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials, req) {
-        return await userService.authenticate(credentials);
+        return await authenticate(credentials);
       },
     }),
   ],

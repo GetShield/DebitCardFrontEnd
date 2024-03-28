@@ -1,4 +1,9 @@
+'use server';
+
 import { Session } from 'next-auth';
+
+import { env } from '@/config';
+
 import { UserWallet, Wallet } from '..';
 
 export const getWallets = async (
@@ -6,16 +11,13 @@ export const getWallets = async (
 ): Promise<Wallet[]> => {
   try {
     const { accessToken } = session?.user;
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/wallets/shield`,
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    );
+    const res = await fetch(`${env.NEXT_PUBLIC_API_URL}/wallets/shield`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
 
     if (!res.ok) {
       throw new Error('Error fetching wallets');
@@ -40,7 +42,7 @@ export const getUserWallets = async (
     console.log('getUserWallets');
     const { accessToken } = session?.user;
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/wallets/get-by-current-user`,
+      `${env.NEXT_PUBLIC_API_URL}/wallets/get-by-current-user`,
       {
         method: 'GET',
         headers: {

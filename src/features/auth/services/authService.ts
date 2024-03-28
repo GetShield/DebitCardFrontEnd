@@ -1,13 +1,10 @@
+'use server';
+
 import { env } from '@/config';
 import { handleError, validateResponse } from '@/lib';
 import { RegisterSchemaType } from '..';
 
-export const userService = {
-  authenticate,
-  register,
-};
-
-async function authenticate(
+export async function authenticate(
   credentials: Record<'email' | 'password', string> | undefined
 ) {
   try {
@@ -37,7 +34,7 @@ async function authenticate(
   }
 }
 
-async function register(input: RegisterSchemaType) {
+export async function register(input: RegisterSchemaType) {
   try {
     const { email, password, user_name } = input;
 
