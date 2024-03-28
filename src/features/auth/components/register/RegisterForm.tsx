@@ -5,9 +5,9 @@ import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { toast } from 'sonner';
 
 import { userService } from '@/features/auth';
+import { handleSubmissionError, handleSubmissionSuccess } from '@/lib';
 import { RegisterSchema, RegisterSchemaType } from '../..';
 import StepOne from './StepOne';
 import StepTwo from './StepTwo';
@@ -27,20 +27,16 @@ const RegisterForm: React.FC<Props> = () => {
 
   const onSubmit: SubmitHandler<RegisterSchemaType> = async (data) => {
     try {
-      const res = await userService.register(data);
-      if (!res) {
-        toast.error('Could not register');
-        return;
-      } else {
-        toast.success('Registered successfully');
-        await signIn('credentials', {
-          ...data,
-          redirect: false,
-        });
-        router.push('/dashboard');
-      }
+      await userService.register(data);
+
+      handleSubmissionSuccess('Registered successfully');
+      await signIn('credentials', {
+        ...data,
+        redirect: false,
+      });
+      router.push('/dashboard');
     } catch (error) {
-      console.log(error);
+      handleSubmissionError(error, 'Could not register');
     }
   };
 

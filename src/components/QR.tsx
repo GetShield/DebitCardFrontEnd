@@ -7,6 +7,7 @@ import QRCode from 'react-qr-code';
 import { toast } from 'sonner';
 
 import { UserWallet, Wallet, WalletForm } from '@/features/wallets';
+import { formatNetwork } from '@/lib';
 import { Button } from '.';
 
 interface Props {
@@ -58,8 +59,8 @@ const QR: React.FC<Props> = ({ userWallet, currentShieldWallet, session }) => {
       <div className='relative m-auto flex max-w-[340px] rounded-md bg-muted p-8'>
         {!userHasWallet && (
           <div className='absolute left-1/2 top-1/2 flex translate-x-[-50%] translate-y-[-50%] select-none rounded-sm bg-secondary p-1 text-center text-xs font-medium leading-5 text-red-500'>
-            You need to provide us your {walletDescription} Wallet of origin
-            first.
+            You need to provide us your {formatNetwork(walletDescription)}{' '}
+            Wallet of origin first.
           </div>
         )}
         <QRCode
@@ -88,7 +89,7 @@ const QR: React.FC<Props> = ({ userWallet, currentShieldWallet, session }) => {
           className='mx-auto my-4 flex px-10 py-2.5'
           onClick={() => setRegisterWallet(walletName || '')}
         >
-          Register my {walletDescription} address
+          Register my {formatNetwork(walletDescription)} address
         </Button>
       )}
     </div>

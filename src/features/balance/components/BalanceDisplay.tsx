@@ -4,7 +4,7 @@ import { Session } from 'next-auth';
 
 import { BtcIcon, EthIcon, TronIcon, USIcon } from '@/assets';
 import { Price } from '@/features/wallets';
-import { findPrice, formatCrypto, fromatCurrency } from '@/lib';
+import { findPrice, formatCrypto, formatNetwork, fromatCurrency } from '@/lib';
 
 import { Balance } from '../types';
 
@@ -62,7 +62,7 @@ const BalanceDisplay: React.FC<Props> = ({
                 <div>{coin?.icon}</div>
                 <div className='flex flex-wrap gap-1 font-bold text-foreground'>
                   <span>{formatCrypto(balance.amount, 6)}</span>{' '}
-                  <span>{balance.blockchain.chain}</span> |{' '}
+                  <span>{formatNetwork(balance.blockchain.chain)}</span> |{' '}
                   <span>USD {fromatCurrency(balance.amount * price, 2)}</span>
                 </div>
               </div>

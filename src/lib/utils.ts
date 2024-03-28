@@ -1,6 +1,8 @@
-import { Price } from '@/features/wallets';
 import clsx, { ClassValue } from 'clsx';
+import { toast } from 'sonner';
 import { twMerge } from 'tailwind-merge';
+
+import { Price } from '@/features/wallets';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -60,4 +62,39 @@ export const findPrice = (nativeSymbol: string, prices: Price[]) => {
     price: 0,
   };
   return price;
+};
+
+export function handleError(error: any, defaultMessage: string): never {
+  let message = defaultMessage;
+  if (error instanceof Error) {
+    message = error.message;
+  }
+  console.error(error);
+  throw new Error(message);
+}
+
+export function handleSubmissionError(
+  error: any,
+  defaultMessage: string
+): void {
+  let message = defaultMessage;
+  if (error instanceof Error) {
+    message = error.message;
+  }
+  console.error(error);
+  toast.error(message);
+}
+
+export function handleSubmissionSuccess(successMessage: string): void {
+  toast.success(successMessage);
+}
+
+export function validateResponse(response: any, message: string) {
+  if (!response.ok) {
+    throw new Error(`${message}: ${response.status} - ${response.statusText}`);
+  }
+}
+
+export const formatNetwork = (network: string | undefined) => {
+  return network ? network.toLocaleLowerCase().replace('-mainnet', '') : '';
 };

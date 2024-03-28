@@ -6,10 +6,10 @@ import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { toast } from 'sonner';
 
 import { LogoIcon } from '@/assets';
 import { Button, Input } from '@/components';
+import { handleSubmissionError, handleSubmissionSuccess } from '@/lib';
 import { LoginSchema, LoginSchemaType } from '../..';
 
 interface Props {}
@@ -33,14 +33,15 @@ const LoginForm: React.FC<Props> = () => {
         ...data,
         redirect: false,
       });
-      if (!result?.ok) {
-        toast.error('Invalid credentials');
-      } else {
-        toast.success('Logged in successfully');
-        router.push('/dashboard');
+
+      if (result?.error) {
+        throw new Error('Invalid credentials');
       }
+
+      handleSubmissionSuccess('Logged in successfully');
+      router.push('/dashboard');
     } catch (error) {
-      console.log(error);
+      handleSubmissionError(error, 'Could not login');
     }
   };
 
@@ -83,6 +84,7 @@ const LoginForm: React.FC<Props> = () => {
             variant='default'
             className='mt-2 py-4 text-sm font-medium tracking-wider'
             isLoading={isSubmitting}
+            isDisabled={isSubmitting}
           >
             Login
           </Button>

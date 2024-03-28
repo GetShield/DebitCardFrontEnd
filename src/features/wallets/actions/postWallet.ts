@@ -1,5 +1,6 @@
 import { Session } from 'next-auth';
 
+import { handleError } from '@/lib';
 import { WalletSchemaType } from '../utils';
 
 interface Props {
@@ -31,7 +32,6 @@ export const postWallet = async ({ session, data }: Props): Promise<any> => {
 
     return result;
   } catch (error) {
-    console.error(error);
-    throw error;
+    handleError(error, 'Could not post wallet');
   }
 };

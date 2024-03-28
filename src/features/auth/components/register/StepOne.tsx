@@ -42,6 +42,11 @@ const StepOne: React.FC<Props> = ({ form, setStep }) => {
         placeholder='Enter your name'
         autoFocus
         {...register('user_name')}
+        onKeyDown={(event) => {
+          if (event.key === 'Enter') {
+            handleContinue();
+          }
+        }}
       />
       <ErrorMessage
         errors={errors}
@@ -50,7 +55,15 @@ const StepOne: React.FC<Props> = ({ form, setStep }) => {
           <span className='text-sm text-destructive'>{message}</span>
         )}
       />
-      <Input placeholder='Enter your email address' {...register('email')} />
+      <Input
+        placeholder='Enter your email address'
+        {...register('email')}
+        onKeyDown={(event) => {
+          if (event.key === 'Enter') {
+            handleContinue();
+          }
+        }}
+      />
       <ErrorMessage
         errors={errors}
         name='email'

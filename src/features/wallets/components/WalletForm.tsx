@@ -1,13 +1,17 @@
 'use client';
 
+import { ErrorMessage } from '@hookform/error-message';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Session } from 'next-auth';
 import { useRouter } from 'next/navigation';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { toast } from 'sonner';
 
 import { Button, Input, Modal } from '@/components';
-import { ErrorMessage } from '@hookform/error-message';
-import { Session } from 'next-auth';
+import {
+  formatNetwork,
+  handleSubmissionError,
+  handleSubmissionSuccess,
+} from '@/lib';
 import { postWallet } from '..';
 import { WalletSchema, WalletSchemaType } from '../utils';
 
@@ -37,12 +41,14 @@ const WalletForm: React.FC<Props> = ({ session, blockchain, onClose }) => {
   const onSubmit: SubmitHandler<WalletSchemaType> = async (data) => {
     try {
       await postWallet({ session, data });
-      toast.success('Wallet registered successfully!');
+      handleSubmissionSuccess('Wallet registered successfully!');
       onClose();
       router.refresh();
     } catch (error) {
-      console.log(error);
-      toast.error('Could not register wallet. Please try again.');
+      handleSubmissionError(
+        error,
+        'Could not register wallet. Please try again.'
+      );
     }
   };
 
@@ -55,7 +61,8 @@ const WalletForm: React.FC<Props> = ({ session, blockchain, onClose }) => {
         <span>
           <h2 className='font-medium'>Register Wallet</h2>
           <p className='text-sm text-muted-foreground'>
-            Register your {blockchain} address to be able to reload your balance
+            Register your {formatNetwork(blockchain)} address to be able to
+            reload your balance
           </p>
         </span>
         <Input
@@ -73,7 +80,7 @@ const WalletForm: React.FC<Props> = ({ session, blockchain, onClose }) => {
         />
         <Input
           autoFocus
-          placeholder={`Enter your ${blockchain} address`}
+          placeholder={`Enter your ${formatNetwork(blockchain)} address`}
           required
           {...register('address')}
         />
@@ -89,6 +96,7 @@ const WalletForm: React.FC<Props> = ({ session, blockchain, onClose }) => {
           variant='default'
           className='mt-2 py-3 text-sm font-medium tracking-wider'
           isLoading={isSubmitting}
+          isDisabled={isSubmitting}
         >
           Register address
         </Button>

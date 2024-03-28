@@ -4,7 +4,7 @@ import { Session } from 'next-auth';
 import { useState } from 'react';
 
 import { QR } from '@/components';
-import { cn } from '@/lib';
+import { cn, formatNetwork } from '@/lib';
 
 import { UserWallet, Wallet } from '..';
 
@@ -26,6 +26,9 @@ const Wallets: React.FC<Props> = ({ wallets, userWallets, session }) => {
   );
 
   const walletsLength = wallets.length;
+
+  if (!walletsLength)
+    return <p className='text-xs text-muted-foreground'>No networks found</p>;
 
   return (
     <div className='flex w-full flex-col gap-8'>
@@ -51,7 +54,7 @@ const Wallets: React.FC<Props> = ({ wallets, userWallets, session }) => {
               )}
               onClick={() => setReload(wallet.blockchains[0].chain)}
             >
-              {wallet.blockchains[0].chain}
+              {formatNetwork(wallet.blockchains[0].chain)}
             </button>
           );
         })}

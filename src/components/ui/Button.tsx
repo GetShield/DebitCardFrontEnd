@@ -11,6 +11,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     | 'ghost'
     | 'link';
   isLoading?: boolean;
+  isDisabled?: boolean;
 }
 
 const Button: FC<ButtonProps> = ({
@@ -18,6 +19,7 @@ const Button: FC<ButtonProps> = ({
   isLoading,
   children,
   className,
+  isDisabled,
   ...props
 }) => {
   const variants = {
@@ -33,11 +35,11 @@ const Button: FC<ButtonProps> = ({
   };
 
   const commonClasses =
-    'inline-flex items-center justify-center rounded-3xl text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50';
+    'inline-flex disabled:opacity-75 items-center justify-center rounded-3xl text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50';
   const classes = cn(commonClasses, variants[variant], className);
 
   return (
-    <button className={classes} {...props}>
+    <button disabled={isDisabled} className={classes} {...props}>
       {isLoading ? <Spinner customClass='w-5 h-5' /> : children}
     </button>
   );

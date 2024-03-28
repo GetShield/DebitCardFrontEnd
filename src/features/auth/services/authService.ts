@@ -1,3 +1,4 @@
+import { handleError, validateResponse } from '@/lib';
 import { RegisterSchemaType } from '..';
 
 export const userService = {
@@ -19,9 +20,7 @@ async function authenticate(
       body: JSON.stringify({ email, password }),
     });
 
-    if (!res.ok) {
-      throw new Error('Error authenticating user');
-    }
+    validateResponse(res, 'Error authenticating user');
 
     const user = await res.json();
     const accessToken = user.token;
@@ -33,10 +32,7 @@ async function authenticate(
       accessToken,
     };
   } catch (error) {
-    if (error instanceof Error) {
-      console.error(error.message);
-    }
-    return null;
+    handleError(error, 'Could not authenticate');
   }
 }
 
@@ -55,9 +51,7 @@ async function register(input: RegisterSchemaType) {
       }
     );
 
-    if (!res.ok) {
-      throw new Error('Error registering user');
-    }
+    validateResponse(res, 'Error registering user');
 
     const user = await res.json();
 
@@ -65,9 +59,6 @@ async function register(input: RegisterSchemaType) {
       user,
     };
   } catch (error) {
-    if (error instanceof Error) {
-      console.error(error.message);
-    }
-    return null;
+    handleError(error, 'Could not register');
   }
 }

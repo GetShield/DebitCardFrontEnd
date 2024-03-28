@@ -60,6 +60,7 @@ const StepTwo: React.FC<Props> = ({ form }) => {
         isLoading={isSubmitting}
         type='submit'
         variant='default'
+        isDisabled={isSubmitting}
       >
         Get started
       </Button>
